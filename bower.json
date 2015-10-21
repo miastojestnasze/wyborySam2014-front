@@ -1,0 +1,20 @@
+{
+  "name": "wyborySam2014-front",
+  "version": "0.0.0",
+  "homepage": "https://github.com/lordzfc/wyborySam2014-front",
+  "authors": [
+    "Paweł Gałwa"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
