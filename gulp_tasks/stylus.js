@@ -8,6 +8,7 @@ function stylus(gulp, plugins) {
       compress: true
     }))
     .pipe(plugins.sourcemaps.write())
+    .pipe(plugins.rename({basename: 'app.min'}))
     .pipe(gulp.dest('build'));
 
     // gulp.src('build/style.css')
