@@ -16,5 +16,13 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "dcjs": "~1.7.4",
+    "angular": "~1.4.7",
+    "angular-ui-router": "~0.2.15",
+    "reset-css": "~2.0.2011012602",
+    "angular-bootstrap": "~0.14.3",
+    "bootstrap-material-design": "~0.3.0"
+  }
 }
