@@ -1,1 +1,1 @@
-console.log("dupa");
+angular.module('', ['test'])
