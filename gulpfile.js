@@ -1,11 +1,20 @@
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 
-var taskList = [
+var buildAppTaskList = [
   'templates',
   'compile-ng-app',
   'stylus',
   'clean-temp'
+];
+
+var buildWithLibs = [
+  'templates',
+  'compile-ng-app',
+  'stylus',
+  'clean-temp',
+  'compile-bower-styles',
+  'compile-bower-scripts'
 ];
 
 function getTask(task) {
@@ -19,15 +28,19 @@ gulp.task('templates', ['jade-to-html', 'angular-templates', 'copy-index']);
 
 
 gulp.task('compile-ng-app', getTask('compile-ng-app'));
+gulp.task('compile-bower-scripts', getTask('compile-bower-scripts'));
 
 
 gulp.task('stylus', getTask('stylus'));
+gulp.task('compile-bower-styles', getTask('compile-bower-styles'));
 
 gulp.task('clean-temp', ['angular-templates', 'compile-ng-app'], getTask('clean-temp'));
 
-gulp.task('build', taskList);
+gulp.task('build', buildAppTaskList);
+gulp.task('build-all', buildWithLibs);
+gulp.task('build-bower-libs', ['compile-bower-scripts', 'compile-bower-styles'])
 
-gulp.task('watch', taskList, function() {
+gulp.task('watch', buildAppTaskList, function() {
   gulp.watch('./app/index.html', ['copy-index']);
   gulp.watch('./app/**/*.jade', ['templates']);
   gulp.watch('./app/**/*.styl', ['stylus']);
