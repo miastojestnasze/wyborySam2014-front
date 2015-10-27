@@ -1,0 +1,23 @@
+@media (min-width: screen-mobile-breakpoint)
+  .charts-view-mobile,
+  .tables-view-mobile
+    display none
+
+.charts-view
+.tables-view
+  max-width 50%
+  max-height: 50%
+  display inline-block
+
+.switch-type-view
+  position: absolute
+  bottom 10px
+  &.to-tables
+    right 1%
+  
+  &.to-charts
+    left 101%
+
+.table-sample
+  position: absolute
+  top: 0

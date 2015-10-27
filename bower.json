@@ -18,11 +18,14 @@
     "tests"
   ],
   "dependencies": {
-    "dcjs": "~1.7.4",
     "angular": "~1.4.7",
     "angular-ui-router": "~0.2.15",
     "reset-css": "~2.0.2011012602",
+    "angular-nvd3": "~1.0.2",
     "angular-bootstrap": "~0.14.3",
-    "bootstrap-material-design": "~0.3.0"
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4",
+    "velocity": "~1.2.3",
+    "angular-smart-table": "~2.1.4"
   }
 }
