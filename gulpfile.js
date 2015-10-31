@@ -13,8 +13,7 @@ var buildWithLibs = [
   'compile-ng-app',
   'stylus',
   'clean-temp',
-  'compile-bower-styles',
-  'compile-bower-scripts'
+  'build-bower-libs'
 ];
 
 function getTask(task) {
@@ -31,11 +30,12 @@ gulp.task('compile-bower-scripts', getTask('compile-bower-scripts'));
 gulp.task('stylus', getTask('stylus'));
 gulp.task('compile-bower-styles', getTask('compile-bower-styles'));
 
+gulp.task('copy-bootstrap-fonts', getTask('copy-bootstrap-fonts'));
 gulp.task('clean-temp', ['angular-templates', 'compile-ng-app'], getTask('clean-temp'));
 
 gulp.task('build', buildAppTaskList);
 gulp.task('build-all', buildWithLibs);
-gulp.task('build-bower-libs', ['compile-bower-scripts', 'compile-bower-styles'])
+gulp.task('build-bower-libs', ['compile-bower-scripts', 'compile-bower-styles', 'copy-bootstrap-fonts'])
 
 gulp.task('watch', buildAppTaskList, function() {
   gulp.watch('./app/index.html', ['copy-index']);

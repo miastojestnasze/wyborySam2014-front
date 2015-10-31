@@ -10,6 +10,6 @@ function compileBowerCSS(gulp, plugins) {
       .pipe(filter)
       .pipe(plugins.concatCss('vendor.min.css'))
       .pipe(plugins.minifyCss())
-      .pipe(gulp.dest('./build'));
+      .pipe(gulp.dest('./build/css'));
   }
 }
