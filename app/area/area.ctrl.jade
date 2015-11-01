@@ -1,7 +1,7 @@
 nav.nav
-  button(class="menu-btn open-menu btn" ng-click='openMenu = !openMenu' ng-class="{active: openMenu}") 
+  a(class="menu-btn open-menu btn" ng-click='openMenu = !openMenu' ng-class="{active: openMenu}") 
     span.glyphicon.glyphicon-menu-hamburger
-  button(class="menu-btn election-dropdown btn" ng-click="electionKindsDropwn = !electionKindsDropwn" ng-class="{active: electionKindsDropwn}") {{electionKind}}
+  a(class="menu-btn election-dropdown btn" ng-click="electionKindsDropwn = !electionKindsDropwn" ng-class="{active: electionKindsDropwn}") {{electionKind}}
     span.glyphicon.glyphicon-chevron-down
   div(class="election-dropdown kinds" ng-class="{moveDown: electionKindsDropwn, moveOutDown: dropdownIsOff()}")
     div(class="element" ng-repeat="kind in electionKinds" ng-click="changeElectionKind(kind)") 
