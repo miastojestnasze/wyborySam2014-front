@@ -50,11 +50,20 @@ page-layout-margins = 0 50px 0 50px
   z-index: 1000
   color #FFF
   font-size 19px
+  padding-top 10px
+  &.active
+    border-bottom 1px solid second-color-bright    
   span
     line-height 35px
     text-align right
+    vertical-align middle
+    &.glyphicon-chevron-down
+      position absolute
+      right 5px
+      padding-top 5px
+
   &.kinds
-    dropdown-height = 140px
+    dropdown-height = 155px
     z-index: 999
     top (50 - dropdown-height)px
     background-color second-color
@@ -63,7 +72,7 @@ page-layout-margins = 0 50px 0 50px
     
     &.moveDown
       transition 0.3s linear all;
-      transform translateY(dropdown-height);
+      transform translateY(140px);
       box-shadow -3px -5px 10px .5px #ccc
     &.moveOutDown
       transition 0.3s linear all;
@@ -72,6 +81,7 @@ page-layout-margins = 0 50px 0 50px
     .element
       cursor pointer
       font-size 16px
+      border-top 1px solid second-color-bright
       &:hover
         background-color second-color-bright
         color #FFF
