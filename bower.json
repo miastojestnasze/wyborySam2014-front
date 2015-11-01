@@ -26,6 +26,7 @@
     "bootstrap": "~3.3.5",
     "jquery": "~2.1.4",
     "velocity": "~1.2.3",
-    "angular-smart-table": "~2.1.4"
+    "angular-smart-table": "~2.1.4",
+    "animate.css": "~3.4.0"
   }
 }

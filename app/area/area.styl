@@ -2,21 +2,126 @@
   .app-view-mobile
     display none
 
+page-layout-margins = 0 50px 0 50px
+.moveLeft
+  transition:0.3s linear all;
+  transform: translateX(160px);
+
+.moveOutLeft
+  transition:0.3s linear all;
+  transform: translateX(0px);
+
 .charts-view
 .tables-view
-  max-width 50%
   max-height: 50%
   display inline-block
+  animation-fill-mode forwards
+  margin page-layout-margins
 
-.switch-type-view
+.charts-view
+  margin-top 100px
+
+.menu-btn
+  height 100%
+  display inline-block
+  z-index: 1000
+  font-size 20px
+  border-radius 0
+  border none
+  background main-color
+  color #FFF
+  position absolute
+  &.active
+  &:hover
+  &:focus  
+    background second-color
+    color #FFF
+  &.open-menu
+    width 50px
+
+.election-dropdown
+  right 10px
+  width 260px
+  text-align left
   position: absolute
-  bottom 10px
-  &.to-tables
-    right 1%
+  background-color main-color
+  z-index: 1000
+  color #FFF
+  font-size 19px
+  span
+    line-height 35px
+    text-align right
+  &.kinds
+    dropdown-height = 140px
+    z-index: 999
+    top (50 - dropdown-height)px
+    background-color second-color
+    display block
+    height dropdown-height
+    
+    &.moveDown
+      transition 0.3s linear all;
+      transform translateY(dropdown-height);
+      box-shadow -3px -5px 10px .5px #ccc
+    &.moveOutDown
+      transition 0.3s linear all;
+      transform translateY(50);
+      
+    .element
+      cursor pointer
+      font-size 16px
+      &:hover
+        background-color second-color-bright
+        color #FFF
+      span
+        padding-left 10px
+.nav
+  height 50px
+  width 100%
+  background-color main-color
+  display block
+  position fixed
+  z-index 1000
+
+.election-kinds
+  height 30px
+  background #DEDEDE
+  position relative
+  top 75px
+  margin page-layout-margins
   
-  &.to-charts
-    left 101%
+    
+.menu
+  height 100%
+  width 200px
+  display none
+  position fixed
+  top 50px
+  left 0
+  z-index: 1000
+  background second-color
+  box-shadow 3px 5px 10px .5px #ccc
+  color #FFF
+  animation-duration: 1s
+  &.fadeInLeft
+    animation-duration: 0.5s
+  &.visible
+    display block
+  
+  input
+    margin 10px 0 10px 10px
+    width 180px
+    border none
+    padding-left 10px
+    height 30px
 
-.table-sample
-  position: absolute
-  top: 0
+  .tree
+    width 100%
+    height 35px
+    font-weight 500
+    line-height 30px
+    padding-left 10px
+    cursor: pointer
+    &:hover
+      background-color second-color-bright
+      color #FFF

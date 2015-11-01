@@ -1,9 +1,21 @@
-section.charts-view
+nav.nav
+  button(class="menu-btn open-menu btn" ng-click='openMenu = !openMenu' ng-class="{active: openMenu}") 
+    span.glyphicon.glyphicon-menu-hamburger
+  button(class="menu-btn election-dropdown btn" ng-click="electionKindsDropwn = !electionKindsDropwn" ng-class="{active: electionKindsDropwn}") {{electionKind}}
+    span.glyphicon.glyphicon-chevron-down
+  div(class="election-dropdown kinds" ng-class="{moveDown: electionKindsDropwn, moveOutDown: dropdownIsOff()}")
+    div(class="element" ng-repeat="kind in electionKinds" ng-click="changeElectionKind(kind)") 
+      span {{kind.name}}
+      
+
+div(class="menu animated" ng-class="{fadeInLeft: openMenu, fadeOutLeft: menuIsOff(), visible: menuIsVisible()}")
+  input(type="text" placeholder="Znajdz okreg wyborczy")
+  div(class="tree" ng-repeat="district in districts") {{district.name}}
+
+section(class="charts-view" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff()}")
   charts-view
-  button(class='btn btn-toggle switch-type-view to-tables' ng-click="switchView()") Wiecej
-section.tables-view
+section(class="tables-view" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff()}")
   tables-view
-  button(class='btn btn-toggle switch-type-view to-charts' ng-click="switchView()") Zobacz Wykresy
 
 section.app-view-mobile
   .col-md-6
