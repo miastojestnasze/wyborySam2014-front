@@ -8,7 +8,7 @@ nav.nav
       span {{kind.name}}
       
 
-div(class="menu animated" ng-class="{fadeInLeft: openMenu, fadeOutLeft: menuIsOff(), visible: menuIsVisible()}")
+div(class="menu" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff()}")
   input(type="text" placeholder="Znajdz okreg wyborczy")
   div(class="tree" ng-repeat="district in districts") {{district.name}}
 
