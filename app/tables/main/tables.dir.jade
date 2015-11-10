@@ -4,26 +4,28 @@ table(st-table="stats" class="table table-striped table-sample")
       th Liczba uprawnionych do glosowania
       th Frekwencja
       th Kart wydanych
+      th Glosow oddanych
       th Glosow waznych
       th Glosow niewaznych
       th Glosow waznych (%)
-      th Glosow oddanych
+      
   tbody
     tr
       td {{stats.geography.number_of_voters}}
       td {{stats.geography.attendance_p + '%'}}
       td {{stats.geography.cards_given}}
+      td {{stats.geography.cards_valid}}
       td {{stats.geography.votes_valid}}
       td {{stats.geography.votes_invalid}}
       td {{stats.geography.votes_valid_p + '%'}}
-      td {{stats.geography.cards_valid}}
+      
 
 table(st-table="stats" class="table table-striped table-sample")
   thead
       tr
         th Partia
         th Liczba Glosow
-        th % Glosow
+        th Glosow (%)
     tbody
       tr(ng-repeat="v in stats.votes")
         td {{v.political_party}}
