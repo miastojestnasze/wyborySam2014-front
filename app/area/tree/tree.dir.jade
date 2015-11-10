@@ -5,5 +5,5 @@ ul(class="elements-tree")
       span(class="glyphicon glyphicon-plus" ng-hide="active >= 0")
     p {{el.name}}
     button(class="btn change-area" ng-click="changeArea($event, el)")
-      span.glyphicon.glyphicon-arrow-right
+      span.glyphicon.glyphicon-arrow-right 
     span(ng-include="'area/tree/tree-rec.dir.html'")

@@ -27,7 +27,7 @@ table(st-table="stats" class="table table-striped table-sample")
         th Liczba Glosow
         th Glosow (%)
     tbody
-      tr(ng-repeat="v in stats.votes")
+      tr(ng-repeat="v in stats.votes| orderBy: '-amount'")
         td {{v.political_party}}
         td {{v.amount}}
         td {{v.percentage + '%'}}
