@@ -5,7 +5,7 @@
 page-layout-margins = 0 50px 0 50px
 .moveLeft
   transition:0.3s linear all;
-  transform: translateX(160px);
+  transform: translateX(130px);
 
 .moveOutLeft
   transition:0.3s linear all;
@@ -21,9 +21,13 @@ page-layout-margins = 0 50px 0 50px
 .charts-view
 .page-title
   margin page-layout-margins
+  &.moveLeft
+    transform: translateX(150px);
 
 .page-title
   margin-top 75px
+  margin-bottom 25px
+  margin-left 80px
   width 100%
 
 .menu-btn
@@ -44,6 +48,7 @@ page-layout-margins = 0 50px 0 50px
   &.open-menu
     width 50px
     line-height 35px
+    padding-left 10px
     
 
 .election-dropdown
