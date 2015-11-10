@@ -7,5 +7,7 @@ angular.module('wyborySam2014', [
   'wyborySam2014.area',
   'wyborySam2014.charts',
   'wyborySam2014.tables',
-  'wyborySam2014.utils'
-  ]);
+  'wyborySam2014.utils',
+  'wyborySam2014.http'
+  ])
+.constant('DEV_API_PREFIX', 'http://localhost:8081/api/stats/');

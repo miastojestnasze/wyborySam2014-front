@@ -1,21 +1,25 @@
 nav.nav
   a(class="menu-btn open-menu btn" ng-click='openMenu = !openMenu' ng-class="{active: openMenu}") 
     span.glyphicon.glyphicon-menu-hamburger
-  a(class="menu-btn election-dropdown btn" ng-click="electionKindsDropwn = !electionKindsDropwn" ng-class="{active: electionKindsDropwn}") {{electionKind}}
+  a(class="menu-btn election-dropdown btn" ng-click="electionKindsDropwn = !electionKindsDropwn" ng-class="{active: electionKindsDropwn}") {{electionKind.name}}
     span.glyphicon.glyphicon-chevron-down
   div(class="election-dropdown kinds" ng-class="{moveDown: electionKindsDropwn, moveOutDown: dropdownIsOff()}")
-    div(class="element" ng-repeat="kind in electionKinds" ng-click="changeElectionKind(kind)") 
+    div(class="element" ng-repeat="kind in tree" ng-click="changeElectionKind(kind)") 
       span {{kind.name}}
       
 
 div(class="menu" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff()}")
-  input(type="text" placeholder="Znajdz okreg wyborczy")
-  div(class="tree" ng-repeat="district in districts") {{district.name}}
+  //- input(type="text" placeholder="Znajdz okreg wyborczy")
+  main-city(election="navTree")
+  .tree
+   areas-tree(tree="navTree.children")
 
+section(class="page-title" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff()}") 
+  h2 {{siteName}}
 section(class="charts-view" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff()}")
-  charts-view
+  charts-view(data="stats")
 section(class="tables-view" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff()}")
-  tables-view
+  tables-view(data="stats")
 
 section.app-view-mobile
   .col-md-6
