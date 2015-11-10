@@ -14,21 +14,35 @@ page-layout-margins = 0 50px 0 50px
 .charts-view
 .tables-view
 .page-title
-  max-height: 50%
+  // max-height: 50%
   display inline-block
   animation-fill-mode forwards
 
 .charts-view
-.page-title
-  margin page-layout-margins
+  width 90%
+  left 30px
   &.moveLeft
     transform: translateX(150px);
+
+.tables-view
+  left 55px
+  position relative
+  width 90%
+  &.moveLeft
+    transform: translateX(170px);
+    width 80%
+
+.charts-view
+.page-title
+  margin page-layout-margins
 
 .page-title
   margin-top 75px
   margin-bottom 25px
-  margin-left 80px
+  margin-left 65px
   width 100%
+  &.moveLeft
+    transform: translateX(160px);
 
 .menu-btn
   height 100%
