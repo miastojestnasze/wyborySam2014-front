@@ -19,7 +19,7 @@ section(class="page-title" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff
 section(class="charts-view" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff()}")
   charts-view(data="stats")
 section(class="tables-view" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff()}")
-  tables-view(data="stats")
+  tables-view(stats="stats" election-kind="electionKind")
 
 section.app-view-mobile
   .col-md-6

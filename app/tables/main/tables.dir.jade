@@ -21,7 +21,7 @@ table(st-table="stats" class="table table-striped table-sample")
       td {{stats.geography.votes_valid_p + '%'}}
       
 h4 Wyniki wyborow:
-table(st-table="stats" class="table table-striped table-sample")
+table(st-table="stats.votes" class="table table-striped table-sample")
   thead
       tr
         th Partia
@@ -33,4 +33,53 @@ table(st-table="stats" class="table table-striped table-sample")
         td {{v.amount}}
         td {{v.percentage + '%'}}
 
+span(ng-if="stats.candidates")
+  h4 Kandydaci:
 
+  table(st-table="stats.candidates" class="table table-striped")
+    thead
+      tr
+        th(st-sort="surname" class="sorter") Nazwisko
+        th(st-sort="names" class="sorter") Imiona
+        th(st-sort="age" class="sorter") Wiek
+        th Miejsce Zam.
+        th(st-sort="sex" class="sorter") Plec
+        th(st-sort="votes" class="sorter") Glosy
+        th(st-sort="surname" class="sorter") Komitet
+        th(st-sort="number_of_list" class="sorter") Numer Listy
+        th(st-sort="pos" class="sorter") Pozycja na liscie
+        th(st-sort="number_of_district" class="sorter") Numer Okr.
+        th Mandat
+      tr
+        th(colspan="6")
+          input(placeholder="Znajdz kandydata" st-search="" type="text")
+        
+        th
+          input(placeholder="Komitet Wyborczy" st-search="election_committee" type="text")
+        th 
+        th 
+        th 
+        th
+          select(st-search="mandate" class="dropdown-select-btn")
+            option(value="") Wszyscy
+            option(value="t") Tak
+            option(value="n") Nie
+    tbody(ng-init="candidatesTableLimit = 30")
+      tr(ng-repeat="c in stats.candidates | limitTo: candidatesTableLimit")
+        td {{c.surname}}
+        td {{c.names}}
+        td {{c.age}}
+        td {{c.place_of_living}}
+        td {{c.sex}}
+        td {{c.votes}}
+        td {{c.election_committee}}
+        td {{c.number_of_list}}
+        td {{c.pos}}
+        td {{c.number_of_district}}
+        td {{c.mandate === 't'? 'Tak' : 'Nie'}}
+      tfoot
+        tr
+          td(colspan="12" class="text-center")
+            div(st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="15")
+        
+    
