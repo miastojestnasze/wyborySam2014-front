@@ -10,4 +10,4 @@ angular.module('wyborySam2014', [
   'wyborySam2014.utils',
   'wyborySam2014.http'
   ])
-.constant('DEV_API_PREFIX', 'http://localhost:8081/api/stats/');
+.constant('DEV_API_PREFIX', 'http://localhost:8081/api/');

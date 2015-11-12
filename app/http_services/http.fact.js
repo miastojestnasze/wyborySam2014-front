@@ -3,7 +3,7 @@ angular.module('wyborySam2014.http')
   var self = {};
   
   self.getAreasTree = function() {
-    return $http.get(DEV_API_PREFIX + 'areas-tree/');
+    return $http.get(DEV_API_PREFIX + 'stats/areas-tree/');
   };
 
   self.getStatsData = function(url) {

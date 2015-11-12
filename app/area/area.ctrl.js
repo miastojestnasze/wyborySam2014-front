@@ -33,7 +33,7 @@ angular.module('wyborySam2014.area')
     if(val !== oldVal) {
       $scope.navTree = getNavTree($scope.tree);
       $rootScope.$broadcast('area::electionTypeChange');
-      getData($scope.electionKind.type +'/', 'Warszawa');
+      getData($scope.electionKind.url, 'Warszawa');
     }
   });
 
@@ -60,7 +60,8 @@ angular.module('wyborySam2014.area')
   $scope.changeElectionKind = function(kind) {
     $scope.electionKind = {
       name: kind.name,
-      type: kind.type
+      type: kind.type,
+      url: kind.url
     };
     httpService.getStatsData(kind.url).success(function(data){
       $scope.statsData = data;
