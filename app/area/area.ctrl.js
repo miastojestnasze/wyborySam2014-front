@@ -1,5 +1,6 @@
 angular.module('wyborySam2014.area')
-.controller('wyborySam2014.area.ctrl', ['$scope', '$rootScope', '$http', 'httpService', function($scope, $rootScope, $http, httpService){
+.controller('wyborySam2014.area.ctrl', ['$scope', '$rootScope', '$http', '$stateParams', 'httpService', 'urls',
+  function($scope, $rootScope, $http, $stateParams, httpService, urls){
   var getNavTree = function(tree) {
     var oneTree = tree.filter(function(obj){
       return obj.type === $scope.electionKind.type;
@@ -11,26 +12,25 @@ angular.module('wyborySam2014.area')
     httpService.getStatsData(url).success(function(stats){
       $scope.stats = stats;
       $scope.siteName = name;
+      urls.changeDataUrl(url, 'stats');
     })
-  }
+  };
 
   $scope.chartData = {key: '', values: []}
-  $scope.electionKind ={
-    name: 'Wybory do Rady Dzielnicy',
-    type: 'district'
-  }
-
 
   httpService.getAreasTree().success(function(tree) {
     $scope.tree = tree;
+    
+    var url = urls.decode($stateParams.dataUrl);
+    var name = urls.getSiteName(url);
+    // console.log();
+    $scope.electionKind = urls.getElectionKind(tree, url);
     $scope.navTree = getNavTree(tree);
-    getData($scope.navTree.children[0].url, $scope.navTree.children[0].name);
+    getData(url, name);
   });
 
-  
-
   $scope.$watch('electionKind', function(val, oldVal) {
-    if(val !== oldVal) {
+    if(val !== oldVal && oldVal !== undefined) {
       $scope.navTree = getNavTree($scope.tree);
       $rootScope.$broadcast('area::electionTypeChange');
       getData($scope.electionKind.url, 'Warszawa');
@@ -66,6 +66,7 @@ angular.module('wyborySam2014.area')
     httpService.getStatsData(kind.url).success(function(data){
       $scope.statsData = data;
     })
+    urls.changeDataUrl(kind.url, 'stats');
     $scope.electionKindsDropwn = false;
   };
   
