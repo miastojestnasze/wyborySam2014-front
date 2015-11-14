@@ -12,11 +12,12 @@ angular.module('wyborySam2014.area')
     httpService.getStatsData(url).success(function(stats){
       $scope.stats = stats;
       $scope.siteName = name;
-      urls.changeDataUrl(url, 'stats');
+      urls.changeDataUrl(url, $scope.dataUrl, 'stats');
     })
   };
 
-  $scope.chartData = {key: '', values: []}
+  $scope.chartData = {key: '', values: []};
+  $scope.dataUrl = $stateParams.dataUrl;
 
   httpService.getAreasTree().success(function(tree) {
     $scope.tree = tree;
@@ -58,6 +59,7 @@ angular.module('wyborySam2014.area')
   };
 
   $scope.changeElectionKind = function(kind) {
+    $scope.dataUrl = kind.url;
     $scope.electionKind = {
       name: kind.name,
       type: kind.type,
