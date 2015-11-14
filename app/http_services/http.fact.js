@@ -8,7 +8,7 @@ angular.module('wyborySam2014.http')
 
   self.getStatsData = function(url) {
     return $http.get(DEV_API_PREFIX + url);
-  } 
+  };
 
   return self;
 }])

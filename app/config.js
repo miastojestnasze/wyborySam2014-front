@@ -6,4 +6,9 @@ angular.module('wyborySam2014')
     controller: 'wyborySam2014.area.ctrl',
     templateUrl: 'area/area.ctrl.html'
   })
+  .state('landing', {
+    url: '',
+    controller: 'wyborySam2014.landing.ctrl',
+    templateUrl: 'landing_page/landing.ctrl.html'
+  })
 }])
