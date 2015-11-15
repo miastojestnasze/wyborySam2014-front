@@ -54,7 +54,7 @@ page-layout-margins = 0 50px 0 50px
   border none
   background main-color
   color #FFF
-  position absolute
+  position relative
   &.active
   &:hover
   &:focus  
@@ -64,6 +64,18 @@ page-layout-margins = 0 50px 0 50px
     width 50px
     line-height 35px
     padding-left 8px
+  &.nav-btn
+    width 150px
+    text-align left
+    padding-left 15px
+    &.chart-btn
+      width 125px
+    &.stats-btn
+      width 140px
+    .glyphicon
+      position absolute
+      right 5px
+      top 14px
     
 
 .election-dropdown

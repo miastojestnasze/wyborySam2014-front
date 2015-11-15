@@ -33,7 +33,7 @@ table(st-table="stats.votes" class="table table-striped table-sample")
         td {{v.amount}}
         td {{v.percentage + '%'}}
 
-span(ng-if="stats.candidates")
+span(ng-if="stats.candidates" id="candidates")
   h4 Kandydaci:
 
   table(st-table="stats.candidates" class="table table-striped")

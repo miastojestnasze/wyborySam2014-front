@@ -72,6 +72,15 @@ angular.module('wyborySam2014.area')
     $scope.electionKindsDropwn = false;
   };
   
+  $scope.scrollTo = function(kind) {
+    if(kind === '#charts') {
+      $(kind).velocity("scroll", { axis: "y", offset: -140})
+      return;
+    }
+    $(kind).velocity("scroll", { axis: "y", offset: -60})
+
+
+  }
 
   
   

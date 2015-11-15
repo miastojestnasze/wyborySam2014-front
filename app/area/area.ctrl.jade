@@ -1,6 +1,12 @@
 nav.nav
   a(class="menu-btn open-menu btn" ng-click='openMenu = !openMenu' ng-class="{active: openMenu}" ng-show="dataUrl") 
     span.glyphicon.glyphicon-menu-hamburger
+  a(class="menu-btn nav-btn open-menu btn chart-btn" ng-click='scrollTo("#charts")' ng-show="dataUrl") Wykresy
+    span.glyphicon.glyphicon-stats
+  a(class="menu-btn nav-btn open-menu btn stats-btn" ng-click='scrollTo("#tables")' ng-show="dataUrl") Statystyki
+    span.glyphicon.glyphicon-th-list
+  a(class="menu-btn nav-btn open-menu btn" ng-click='scrollTo("#candidates")' ng-show="stats.candidates && dataUrl") Kandydaci
+    span.glyphicon.glyphicon-user
   a(class="menu-btn election-dropdown btn" ng-click="electionKindsDropwn = !electionKindsDropwn" ng-class="{active: electionKindsDropwn}") {{electionKind.name}}
     span.glyphicon.glyphicon-chevron-down
   div(class="election-dropdown kinds" ng-class="{moveDown: electionKindsDropwn, moveOutDown: dropdownIsOff()}")
@@ -16,9 +22,9 @@ div(class="menu" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff()}")
 
 section(class="page-title" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff()}") 
   h2 {{siteName}}
-section(class="charts-view" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff()}" ng-hide="!dataUrl")
+section(class="charts-view" id="charts" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff()}" ng-hide="!dataUrl")
   charts-view(data="stats")
-section(class="tables-view" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff()}" ng-hide="!dataUrl")
+section(class="tables-view" id="tables" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff()}" ng-hide="!dataUrl")
   tables-view(stats="stats" election-kind="electionKind")
 div(class="col-md-12 choose-election-data" ng-show = "!dataUrl")
   h1 Wybierz typ wyborów
