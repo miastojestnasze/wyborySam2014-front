@@ -39,6 +39,5 @@ node_modules
 
 # Temp files
 .temp
-build
 
 .DS_Store

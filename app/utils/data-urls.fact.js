@@ -12,16 +12,18 @@ angular.module('wyborySam2014.utils')
   };
 
   self.getSiteName = function(url, splitUrlParam) {
-    var urlsArr = url.split(splitUrlParam || '/');
-    var dataType = urlsArr[urlsArr.length - 2].split('-');
+    if(url) {
+      var urlsArr = url.split(splitUrlParam || '/');
+      var dataType = urlsArr[urlsArr.length - 2].split('-');  
+    }
 
-    if(dataType[0] === 'circle') {
+    if(url && dataType[0] === 'circle') {
       return 'Okręg nr ' + dataType[1];
     }
-    else if(dataType[0] === 'circuit') {
+    else if(url && dataType[0] === 'circuit') {
       return 'Obwód nr ' +  dataType[1];
     }
-    else if(dataType[0] === 'district') {
+    else if(url && dataType[0] === 'district') {
       return dataType[1];
     }
     else {
@@ -31,8 +33,13 @@ angular.module('wyborySam2014.utils')
 
   self.getElectionKind = function(tree, url, splitUrlParam) {
     if(!url || !tree) {
-      return;
+      return { //default data
+        name: 'Wybory do Rady Miasta',
+        type: 'city_council',
+        url: 'stats/city_council/'
+      }
     }
+
     var type = url.split(splitUrlParam || '/')[1];
     var node = tree.filter(function(obj){
       return obj.type === type;
@@ -44,12 +51,13 @@ angular.module('wyborySam2014.utils')
     };
   }
 
-  self.changeDataUrl = function(url, siteType) {
-    // console.log($location.path());
+  self.changeDataUrl = function(url, StateParamDataUrl, siteType) {
+    
     var dataUrl = $location.path().split('/');
-    if(_.last(dataUrl).indexOf('.') > -1) {
-      dataUrl.pop();
-    }
+    
+    //it is dangerous but now works 
+    dataUrl.pop();
+    
     dataUrl.push(self.code(url));
     $location.path(dataUrl.join('/'));
   }

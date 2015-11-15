@@ -7,7 +7,7 @@ function stylus(gulp, plugins) {
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.stylus({
       compress: true,
-      use: [autoprefixer('iOS >= 7', 'last 1 Chrome version')]
+      use: [autoprefixer('iOS >= 7', 'last 1 Chrome version', 'ie 10', 'last 1 Firefox version')]
     }))
     .pipe(plugins.sourcemaps.write())
     .pipe(plugins.rename({basename: 'app.min'}))
