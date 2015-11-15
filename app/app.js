@@ -12,4 +12,4 @@ angular.module('wyborySam2014', [
   'wyborySam2014.landingPage'
   ])
 .constant('DEV_API_PREFIX', 'http://localhost:8081/api/')
-.constant('HEROKU_API_PREFIX', 'wyreczamy-pkw.herokuapp.com/api/');
+.constant('HEROKU_API_PREFIX', 'http://wyreczamy-pkw.herokuapp.com/api/');
