@@ -71,9 +71,9 @@ page-layout-margins = 0 50px 0 50px
   width 260px
   text-align left
   position: absolute
-  background-color third-color
+  background-color mjn-yellow
   z-index: 1000
-  color #FFF
+  color #000
   font-size 18px
   padding-top 10px
   &.active
@@ -94,11 +94,13 @@ page-layout-margins = 0 50px 0 50px
     background-color second-color
     display block
     height dropdown-height
+    color #FFF
+    text-align center
     
     &.moveDown
       transition 0.3s linear all;
       transform translateY(178px);
-      box-shadow -3px -5px 10px .5px #ccc
+      // box-shadow -3px -5px 10px .5px #ccc
     &.moveOutDown
       transition 0.3s linear all;
       transform translateY(50);

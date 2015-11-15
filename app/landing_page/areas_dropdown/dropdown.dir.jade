@@ -1,8 +1,0 @@
-.areas-choose
-  button(class="btn areas-button-view-val" ng-click="openHideDropdown($event)")
-    {{model.name || defaultString}} Test 
-    div(class="areas-dropdown" ng-show="dropdownActive")
-      input(type="text" class="areas-search" ng-model="query")
-      div(class="element" ng-repeat="area in data|filter:query" ng-click="select(area)") {{area.name}}
-      
-  
