@@ -9,15 +9,18 @@ angular.module('wyborySam2014.area')
   };
 
   var getData = function (url, name) {
+    $scope.showSpinner = true;
     httpService.getStatsData(url).success(function(stats){
       $scope.stats = stats;
       $scope.siteName = name;
       urls.changeDataUrl(url, $scope.dataUrl, 'stats');
+      $scope.showSpinner = false;
     })
   };
 
   $scope.chartData = {key: '', values: []};
   $scope.dataUrl = $stateParams.dataUrl;
+  $scope.showSpinner = false;
 
   httpService.getAreasTree().success(function(tree) {
     $scope.tree = tree;
