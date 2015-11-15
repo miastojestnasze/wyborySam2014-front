@@ -23,7 +23,7 @@
     "gulp-stylus": "^2.1.0"
   },
   "devDependencies": {
-    "autoprefixer-stylus": "^0.8.0",
+    "autoprefixer-stylus": "^0.8.1",
     "del": "^2.0.2",
     "gulp-angular-templatecache": "^1.8.0",
     "gulp-concat": "^2.6.0",
