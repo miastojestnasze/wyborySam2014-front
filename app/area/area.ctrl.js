@@ -21,6 +21,7 @@ angular.module('wyborySam2014.area')
   $scope.chartData = {key: '', values: []};
   $scope.dataUrl = $stateParams.dataUrl;
   $scope.showSpinner = false;
+  $scope.openMenu = true;
 
   httpService.getAreasTree().success(function(tree) {
     $scope.tree = tree;

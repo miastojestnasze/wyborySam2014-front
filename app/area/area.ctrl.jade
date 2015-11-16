@@ -7,14 +7,16 @@ nav.nav
     span.glyphicon.glyphicon-th-list
   a(class="menu-btn nav-btn open-menu btn" ng-click='scrollTo("#candidates")' ng-show="stats.candidates && dataUrl") Kandydaci
     span.glyphicon.glyphicon-user
-  a(class="menu-btn election-dropdown btn" ng-click="electionKindsDropwn = !electionKindsDropwn" ng-class="{active: electionKindsDropwn}") {{electionKind.name}}
+  h4(class="election-help-text" ng-show = "!dataUrl") Typ wyborów
+    span(class="glyphicon glyphicon-share-alt")
+  a(class="menu-btn election-dropdown btn" ng-click="electionKindsDropwn = !electionKindsDropwn" ng-class="{active: electionKindsDropwn, default: !dataUrl}") {{electionKind.name}}
     span.glyphicon.glyphicon-chevron-down
   div(class="election-dropdown kinds" ng-class="{moveDown: electionKindsDropwn, moveOutDown: dropdownIsOff()}")
     div(class="element" ng-repeat="kind in tree" ng-click="changeElectionKind(kind)") 
       span {{kind.name}}
       
 
-div(class="menu" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff()}")
+div(class="menu moveLeft" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff()}" ng-show="dataUrl")
   //- input(type="text" placeholder="Znajdz okreg wyborczy")
   main-city(election="navTree")
   .tree
@@ -27,8 +29,9 @@ section(class="charts-view" id="charts" ng-class="{moveLeft: openMenu, moveOutLe
 section(class="tables-view" id="tables" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff()}" ng-hide="!dataUrl")
   tables-view(stats="stats" election-kind="electionKind")
 div(class="col-md-12 choose-election-data" ng-show = "!dataUrl")
-  h1 Wybierz typ wyborów
+  h1 Wybory Samorządowe 2014
     span.glyphicon.glyphicon-stats
+  h3 Warszawa 2014
 //- div(class="col-md-12 spinner" ng-show = "showSpinner")
 
 
