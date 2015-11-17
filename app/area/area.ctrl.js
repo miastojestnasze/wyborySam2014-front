@@ -8,12 +8,16 @@ angular.module('wyborySam2014.area')
     return oneTree;
   };
 
+  var changeSiteProperties = function(stats, name, url) {
+    $scope.stats = stats;
+    $scope.siteName = name;
+    urls.changeDataUrl(url, $scope.dataUrl, 'stats');
+  };
+
   var getData = function (url, name) {
     $scope.showSpinner = true;
     httpService.getStatsData(url).success(function(stats){
-      $scope.stats = stats;
-      $scope.siteName = name;
-      urls.changeDataUrl(url, $scope.dataUrl, 'stats');
+      changeSiteProperties(stats, name, url);
       $scope.showSpinner = false;
     })
   };
@@ -27,26 +31,23 @@ angular.module('wyborySam2014.area')
     
     var url = urls.decode($stateParams.dataUrl);
     var name = urls.getSiteName(url);
-    // console.log();
     $scope.electionKind = urls.getElectionKind(tree, url);
+    $scope.tree = tree;
     $scope.navTree = getNavTree(tree);
+    if($stateParams.dataUrl.length === 0) {
+      return;
+    } 
     getData(url, name);
   });
 
-  $scope.$watch('electionKind', function(val, oldVal) {
-    if(val !== oldVal && oldVal !== undefined) {
-      $scope.navTree = getNavTree($scope.tree);
-      $rootScope.$broadcast('area::electionTypeChange');
-      getData($scope.electionKind.url, 'Warszawa');
-    }
-  });
 
   var des = $rootScope.$on('area::areaTypeChange', function(e, url, name){
     getData(url, name)
   });
   $scope.$on('$destroy', des);
 
-  $scope.showHideNavMenu = function() {
+  $scope.showHideNavMenu = function(event) {
+    event.stopPropagation();
     if($scope.openMenu || $scope.openMenu === undefined) {
       $scope.openMenu = false;
     }
@@ -76,28 +77,31 @@ angular.module('wyborySam2014.area')
 
   $scope.changeElectionKind = function(kind) {
     $scope.dataUrl = kind.url;
-    $scope.electionKind = {
-      name: kind.name,
-      type: kind.type,
-      url: kind.url
-    };
+    $scope.showSpinner = true;
     httpService.getStatsData(kind.url).success(function(data){
       $scope.statsData = data;
+        $scope.electionKind = {
+        name: kind.name,
+        type: kind.type,
+        url: kind.url
+      };
+      changeSiteProperties(data, 'Warszawa', kind.url);
+      $scope.navTree = getNavTree($scope.tree);
+      $rootScope.$broadcast('area::electionTypeChange');
+      $scope.electionKindsDropwn = false;
+      $scope.showSpinner = false;
     })
-    urls.changeDataUrl(kind.url, 'stats');
-    $scope.electionKindsDropwn = false;
+    
   };
   
   $scope.scrollTo = function(kind) {
     if(kind === '#charts') {
-      $(kind).velocity("scroll", { axis: "y", offset: -140})
+      $(kind).velocity("scroll", { axis: "y", offset: -140});
       return;
     }
-    $(kind).velocity("scroll", { axis: "y", offset: -60})
+    $(kind).velocity("scroll", { axis: "y", offset: -60});
+  };
 
 
-  }
-
-  
   
 }]);

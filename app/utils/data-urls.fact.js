@@ -1,6 +1,6 @@
 'use strict';
 angular.module('wyborySam2014.utils')
-.factory('urls', ['$location', function($location){
+.factory('urls', ['$state', function($state){
   var self = {};
   
   self.code = function(url) {
@@ -52,14 +52,7 @@ angular.module('wyborySam2014.utils')
   }
 
   self.changeDataUrl = function(url, StateParamDataUrl, siteType) {
-    
-    var dataUrl = $location.path().split('/');
-    
-    //it is dangerous but now works 
-    dataUrl.pop();
-    
-    dataUrl.push(self.code(url));
-    $location.path(dataUrl.join('/'));
+    $state.go('stats-app', { dataUrl: self.code(url) }, { notify: false });
   }
 
   return self;

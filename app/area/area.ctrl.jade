@@ -1,5 +1,5 @@
 nav.nav
-  a(class="menu-btn open-menu btn" ng-click='showHideNavMenu()' ng-class="{active: openMenu || openMenu === undefined}" ng-show="dataUrl") 
+  a(class="menu-btn open-menu btn" ng-click='showHideNavMenu($event)' ng-class="{active: openMenu || openMenu === undefined}" ng-show="dataUrl") 
     span.glyphicon.glyphicon-menu-hamburger
   a(class="menu-btn nav-btn open-menu btn chart-btn" ng-click='scrollTo("#charts")' ng-show="dataUrl && stats") Wykresy
     span.glyphicon.glyphicon-stats
@@ -30,7 +30,7 @@ div(class="col-md-12 choose-election-data" ng-show = "!dataUrl")
   h1 Wybory Samorządowe 2014
     span.glyphicon.glyphicon-stats
   h3 Warszawa 2014
-//- div(class="col-md-12 spinner" ng-show = "showSpinner")
+div(class="col-md-12 spinner" ng-show = "showSpinner")
 
 
 
