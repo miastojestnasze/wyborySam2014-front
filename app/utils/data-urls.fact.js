@@ -41,14 +41,9 @@ angular.module('wyborySam2014.utils')
     }
 
     var type = url.split(splitUrlParam || '/')[1];
-    var node = tree.filter(function(obj){
+    return tree.filter(function(obj){
       return obj.type === type;
     })[0];
-    return {
-      name: node.name,
-      type: node.type,
-      url: node.url
-    };
   }
 
   self.changeDataUrl = function(url, StateParamDataUrl, siteType) {

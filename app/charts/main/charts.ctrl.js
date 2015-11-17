@@ -14,7 +14,7 @@ angular.module('wyborySam2014.charts')
       },
       x: function(d){return d.label;},
       y: function(d){return d.value;},
-      showValues: false,
+      showValues: true,
       valueFormat: function(d){
         return d3.format(',.2f%')(d);
       },

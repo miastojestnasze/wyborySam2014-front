@@ -12,6 +12,11 @@ angular.module('wyborySam2014.area')
     $scope.stats = stats;
     $scope.siteName = name;
     urls.changeDataUrl(url, $scope.dataUrl, 'stats');
+    //force charts to refresh, workaround for https://github.com/krispo/angular-nvd3/issues/259
+    setTimeout(function () {
+      window.dispatchEvent(new Event('resize'));   
+    });
+    $rootScope.$broadcast('site::changed');
   };
 
   var getData = function (url, name) {
@@ -24,20 +29,20 @@ angular.module('wyborySam2014.area')
 
   $scope.chartData = {key: '', values: []};
   $scope.dataUrl = $stateParams.dataUrl;
-  $scope.showSpinner = false;
+  $scope.showSpinner = true;
 
   httpService.getAreasTree().success(function(tree) {
     $scope.tree = tree;
-    
+    $scope.showSpinner = false;
     var url = urls.decode($stateParams.dataUrl);
     var name = urls.getSiteName(url);
-    $scope.electionKind = urls.getElectionKind(tree, url);
     $scope.tree = tree;
-    $scope.navTree = getNavTree(tree);
-    if($stateParams.dataUrl.length === 0) {
-      return;
-    } 
-    getData(url, name);
+
+    if(url) {
+      $scope.electionKind = urls.getElectionKind(tree, url);
+      getData(url, name);
+    }
+    
   });
 
 
@@ -52,7 +57,7 @@ angular.module('wyborySam2014.area')
       $scope.openMenu = false;
     }
     else {
-      $scope.openMenu = true; 
+      $scope.openMenu = true;
     }
   }
 
@@ -66,7 +71,7 @@ angular.module('wyborySam2014.area')
   $scope.menuDefault = function() {
     return $scope.openMenu === undefined;
   }
-  
+
   $scope.dropdownIsOff = function() {
     return $scope.electionKindsDropwn === false;
   };
@@ -80,28 +85,43 @@ angular.module('wyborySam2014.area')
     $scope.showSpinner = true;
     httpService.getStatsData(kind.url).success(function(data){
       $scope.statsData = data;
-        $scope.electionKind = {
-        name: kind.name,
-        type: kind.type,
-        url: kind.url
-      };
+      $scope.electionKind = kind;
       changeSiteProperties(data, 'Warszawa', kind.url);
       $scope.navTree = getNavTree($scope.tree);
       $rootScope.$broadcast('area::electionTypeChange');
       $scope.electionKindsDropwn = false;
       $scope.showSpinner = false;
     })
-    
+
   };
-  
+
   $scope.scrollTo = function(kind) {
-    if(kind === '#charts') {
-      $(kind).velocity("scroll", { axis: "y", offset: -140});
-      return;
-    }
     $(kind).velocity("scroll", { axis: "y", offset: -60});
   };
 
-
+  $scope.changeArea = function(element) {
+    if (!element) {
+      return;
+    }
+    $rootScope.$broadcast('area::areaTypeChange', element.url, element.name);
+  };
+  
+  $scope.showStats = function () {
+    var currentArea = $scope.areaLevel3 || $scope.areaLevel2 || $scope.areaLevel1 || $scope.electionKind;
+    $rootScope.$broadcast('area::areaTypeChange', currentArea.url, currentArea.name);
+    var off = $rootScope.$on('site::changed', function () {
+      $scope.scrollTo('#links');
+      off();
+    });
+  }
+  
+  $scope.electionNames = {
+    "city_council": 'do rady miasta',
+    "district": 'do rad dzielnic',
+    "president_first_turn": 'na prezydenta miasta (I tura)',
+    "president_second_turn": 'na prezydenta miasta (II tura)',
+    "voivodeship": 'do sejmiku wojewódzkiego'
+  }
+  
   
 }]);

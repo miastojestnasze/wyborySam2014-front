@@ -1,85 +1,90 @@
-h4 Geografia:
-table(st-table="stats" class="table table-striped table-sample")
-  thead
-    tr
-      th Liczba uprawnionych do glosowania
-      th Frekwencja
-      th Kart wydanych
-      th Glosow oddanych
-      th Glosow waznych
-      th Glosow niewaznych
-      th Glosow waznych (%)
-      
-  tbody
-    tr
-      td {{stats.geography.number_of_voters}}
-      td {{stats.geography.attendance_p + '%'}}
-      td {{stats.geography.cards_given}}
-      td {{stats.geography.cards_valid}}
-      td {{stats.geography.votes_valid}}
-      td {{stats.geography.votes_invalid}}
-      td {{stats.geography.votes_valid_p + '%'}}
-      
-h4 Wyniki wyborow:
-table(st-table="stats.votes" class="table table-striped table-sample")
-  thead
-      tr
-        th Partia
-        th Liczba Glosow
-        th Glosow (%)
-    tbody
-      tr(ng-repeat="v in stats.votes| orderBy: '-amount'")
-        td {{v.political_party}}
-        td {{v.amount}}
-        td {{v.percentage + '%'}}
+h4
+  strong Statystyka
 
-span(ng-if="stats.candidates" id="candidates")
-  h4 Kandydaci:
-
-  table(st-table="stats.candidates" class="table table-striped")
+.table-responsive
+  table(st-table="stats" class="table table-striped table-sample ")
     thead
       tr
-        th(st-sort="surname" class="sorter") Nazwisko
-        th(st-sort="names" class="sorter") Imiona
-        th(st-sort="age" class="sorter") Wiek
-        th Miejsce Zam.
-        th(st-sort="sex" class="sorter") Plec
-        th(st-sort="votes" class="sorter") Glosy
-        th(st-sort="surname" class="sorter") Komitet
-        th(st-sort="number_of_list" class="sorter") Numer Listy
-        th(st-sort="pos" class="sorter") Pozycja na liscie
-        th(st-sort="number_of_district" class="sorter") Numer Okr.
-        th Mandat
+        th Uprawnionych do głosowania
+        th Frekwencja
+        th Kart wydanych
+        th Gł. oddanych
+        th Gł. ważnych
+        th Gł. nieważnych
+        th Gł. ważnych (%)
+
+    tbody
       tr
-        th(colspan="6")
-          input(placeholder="Znajdz kandydata" st-search="" type="text")
-        
-        th
-          input(placeholder="Komitet Wyborczy" st-search="election_committee" type="text")
-        th 
-        th 
-        th 
-        th
-          select(st-search="mandate" class="dropdown-select-btn")
-            option(value="") Wszyscy
-            option(value="t") Tak
-            option(value="n") Nie
-    tbody(ng-init="candidatesTableLimit = 30")
-      tr(ng-repeat="c in stats.candidates | limitTo: candidatesTableLimit")
-        td {{c.surname}}
-        td {{c.names}}
-        td {{c.age}}
-        td {{c.place_of_living}}
-        td {{c.sex}}
-        td {{c.votes}}
-        td {{c.election_committee}}
-        td {{c.number_of_list}}
-        td {{c.pos}}
-        td {{c.number_of_district}}
-        td {{c.mandate === 't'? 'Tak' : 'Nie'}}
-      tfoot
+        td {{stats.geography.number_of_voters}}
+        td {{stats.geography.attendance_p + '%'}}
+        td {{stats.geography.cards_given}}
+        td {{stats.geography.cards_valid}}
+        td {{stats.geography.votes_valid}}
+        td {{stats.geography.votes_invalid}}
+        td {{stats.geography.votes_valid_p + '%'}}
+
+h4 
+  strong Wyniki komitetów:
+
+.table-responsive
+  table(st-table="stats.votes" class="table table-striped table-sample")
+    thead
         tr
-          td(colspan="12" class="text-center")
-            div(st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="15")
-        
+          th Komitet
+          th Liczba głosów
+          th Głosów (%)
+      tbody
+        tr(ng-repeat="v in stats.votes| orderBy: '-amount'")
+          td {{v.political_party}}
+          td {{v.amount}}
+          td {{v.percentage + '%'}}
+
+div(ng-if="stats.candidates" id="candidates" st-table="stats.candidates")
+  h4 
+    strong Wyniki kandydatów:
+  
+  .table-responsive
+    table(class="table table-striped")
+      thead
+        tr
+          th(st-sort="surname" class="sorter") Nazwisko
+          th(st-sort="names" class="sorter") Imiona
+          th(st-sort="age" class="sorter") Wiek
+          th Miejsce Zam.
+          th(st-sort="sex" class="sorter") Płeć
+          th(st-sort="votes" class="sorter") Głosy
+          th(st-sort="surname" class="sorter") Komitet
+          th(st-sort="number_of_list" class="sorter") Lista
+          th(st-sort="pos" class="sorter") Nr na liscie
+          th(st-sort="number_of_district" class="sorter") Okręg.
+          th Mandat
+        tr
+          th(colspan="6")
+            input(placeholder="Znajdz kandydata" st-search="" type="text")
+
+          th
+            input(placeholder="Komitet Wyborczy" st-search="election_committee" type="text")
+          th
+          th
+          th
+          th
+            select(st-search="mandate" class="dropdown-select-btn")
+              option(value="") Wszyscy
+              option(value="t") Tak
+              option(value="n") Nie
+      tbody(ng-init="candidatesTableLimit = 30")
+        tr(ng-repeat="c in stats.candidates | limitTo: candidatesTableLimit")
+          td {{c.surname}}
+          td {{c.names}}
+          td {{c.age}}
+          td {{c.place_of_living}}
+          td {{c.sex}}
+          td {{c.votes}}
+          td {{c.election_committee}}
+          td {{c.number_of_list}}
+          td {{c.pos}}
+          td {{c.number_of_district}}
+          td {{c.mandate === 't'? 'Tak' : 'Nie'}}
     
+  div.text-center
+    div(st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="15")

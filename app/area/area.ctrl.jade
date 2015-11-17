@@ -1,41 +1,81 @@
-nav.nav
-  a(class="menu-btn open-menu btn" ng-click='showHideNavMenu($event)' ng-class="{active: openMenu || openMenu === undefined}" ng-show="dataUrl") 
-    span.glyphicon.glyphicon-menu-hamburger
-  a(class="menu-btn nav-btn open-menu btn chart-btn" ng-click='scrollTo("#charts")' ng-show="dataUrl && stats") Wykresy
-    span.glyphicon.glyphicon-stats
-  a(class="menu-btn nav-btn open-menu btn stats-btn" ng-click='scrollTo("#tables")' ng-show="dataUrl && stats") Statystyki
-    span.glyphicon.glyphicon-th-list
-  a(class="menu-btn nav-btn open-menu btn" ng-click='scrollTo("#candidates")' ng-show="stats.candidates && dataUrl") Kandydaci
-    span.glyphicon.glyphicon-user
-  a(class="menu-btn election-dropdown btn" ng-click="electionKindsDropwn = !electionKindsDropwn" ng-class="{active: electionKindsDropwn, default: !dataUrl}") {{electionKind.name}}
-    span.glyphicon.glyphicon-chevron-down
-  div(class="election-dropdown kinds" ng-class="{moveDown: electionKindsDropwn, moveOutDown: dropdownIsOff()}")
-    div(class="element" ng-repeat="kind in tree" ng-click="changeElectionKind(kind)") 
-      span {{kind.name}}
+.container
+
+  div.pkw-header.page-header.text-center
+    h1 
+      strong Wyręczamy PKW
+    p
+      | Od wyborów samorządowych 2014 minął już rok. Pomimo tego PKW ciągle nie opublikowała 
+      a(href="http://wybory2014.pkw.gov.pl/pl/wyniki/wojewodztwo/view/14" target="_blank") wyników dla Warszawy
+    p 
+      strong  Postanowiliśmy ich wyręczyć! 
+
+  section.pkw-chooser.text-center.form-inline
+    
+    div.spinner(ng-show="showSpinner")
+      .three-quarters-loader
       
+    //- Poziom 1: rodzaj wyborów
+    span.pkw-chooser-item
+      strong Zobacz wyniki  
+      select(ng-options="election as electionNames[election.type] for election in tree" ng-model="electionKind") 
+        option(ng-if="!electionKind" value="") ☛ wybierz rodzaj wyborow
+    
+    //- Poziom 2: wybór dzielnicy
+    span.pkw-chooser-item(ng-show="electionKind.children && electionKind.type != 'city_council'")
+      span(ng-if="electionKind.type != 'city_council'")  w dzielnicy 
+      select(ng-options="area as area.name for area in electionKind.children | orderBy: 'name' " ng-model="areaLevel1") 
+        option(value="") wszystkie dzielnice
+    
+    //- Poziom 2: wybór okręgu (tylko dla Rady Miasta)
+    span.pkw-chooser-item(ng-show="electionKind.children && electionKind.type == 'city_council'")
+      span(ng-if="electionKind.type == 'city_council'")  w okręgu 
+      select(ng-options="area as area.name for area in electionKind.children | orderBy: 'name' " ng-model="areaLevel1") 
+        option(value="") wszystkie okręgi
+      
+    //- Poziom 3: wybór obwodu
+    span.pkw-chooser-item(ng-show="areaLevel1.children && electionKind.type != 'district'")
+      span(ng-if="electionKind.type != 'district'" )  w obwodzie 
+      select(ng-options="area as area.name for area in areaLevel1.children" ng-model="areaLevel2") 
+        option(value="") wszystkie obwody
 
-div(class="menu" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff(), menuDefault: menuDefault()}" ng-show="dataUrl")
-  //- input(type="text" placeholder="Znajdz okreg wyborczy")
-  main-city(election="navTree")
-  .tree
-   areas-tree(tree="navTree.children")
+    //- Poziom 3: wybór okręgu (tylko dla Rad Dzielnic)        
+    span.pkw-chooser-item(ng-show="areaLevel1.children && electionKind.type == 'district'")
+      span(ng-if="electionKind.type == 'district'")  w okręgu 
+      select(ng-options="area as area.name for area in areaLevel1.children" ng-model="areaLevel2") 
+        option(value="") wszystkie okręgi
 
-section(class="page-title" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff(), menuDefault: menuDefault()}") 
-  h2 {{siteName}}
-section(class="charts-view col-md-12" id="charts" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff(), menuDefault: menuDefault()}" ng-hide="!dataUrl")
-  charts-view(data="stats")
-section(class="tables-view col-md-12" id="tables" ng-class="{moveLeft: openMenu, moveOutLeft: menuIsOff(), menuDefault: menuDefault()}" ng-hide="!dataUrl")
-  tables-view(stats="stats" election-kind="electionKind")
-div(class="col-md-12 choose-election-data" ng-show = "!dataUrl")
-  h1 Wybory Samorządowe 2014
-    span.glyphicon.glyphicon-stats
-  h3 Warszawa 2014
-div(class="col-md-12 spinner" ng-show = "showSpinner")
+    //- Poziom 4: wybór obwodów (tylko dla Rad Dzielnic)        
+    span.pkw-chooser-item(ng-show="areaLevel2.children")
+      span  w obwodzie 
+      select(ng-options="area as area.name for area in areaLevel2.children" ng-model="areaLevel3") 
+        option(value="") wszystkie obwody
 
+    span.pkw-chooser-item()
+      span  
+      button.pkw-chooser-button(ng-click="showStats()") Pokaż
+      
+  section.text-center(id="links")
+    
+    div.pkw-stats-links(ng-if="stats")
+    
+      span Przejdź do:
+      
+      a(class=" chart-btn" ng-click='scrollTo("#charts")' ng-show="stats")
+        span.glyphicon.glyphicon-stats 
+        span  Wykresy
+        
+      a(class=" stats-btn" ng-click='scrollTo("#tables")' ng-show="stats")
+        span.glyphicon.glyphicon-th-list 
+        span  Statystyki
 
+      a(class="" ng-click='scrollTo("#candidates")' ng-show="stats.candidates")
+        span.glyphicon.glyphicon-user 
+        span  Kandydaci
+        
+  section(id="charts")
+    charts-view(data="stats"  ng-hide="!stats")
+  
+  section(id="tables")
+    tables-view(stats="stats" election-kind="electionKind"  ng-hide="!stats")
 
-//- section.app-view-mobile
-//-   .col-md-6
-//-     charts-view
-//-   .col-md-6
-//-     tables-view
+  

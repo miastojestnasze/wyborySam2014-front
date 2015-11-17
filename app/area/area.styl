@@ -189,13 +189,114 @@ h4.election-help-text
   position absolute
 
 .spinner
-  position fixed
+  position absolute
   z-index: 1000
   background-color rgba(255,255,255, 0.8)
   display block
-  top 0px
-  height 100%
+  top 0
+  bottom 0 
+  right 0
+  left 0
 
 @media screen and (max-width: 996px)
   .choose-election-data
     width 100%
+
+.pkw-chooser
+  
+  position relative
+  background #eee;
+  border-radius 3px
+  padding 12px
+  margin-bottom 1em
+  
+  &-item
+    display block
+    line-height 40px
+    
+    @media screen and (min-width: 600px)
+      display inline
+  
+  select 
+    padding 5px 2px
+    border-radius 3px
+    max-width 15em
+    
+  &-button 
+    background #fde433
+    border 1px solid #EED62C
+    color #222
+    border-radius 3px
+    padding 8px 25px
+    text-transform uppercase
+    font-size 0.8em
+    font-weight bold
+    width 75%
+    vertical-align middle
+    line-height 1.4
+    
+    @media screen and (min-width: 600px)
+      width auto
+      margin-left 1em
+
+.pkw-stats-links
+  
+  a
+    cursor pointer
+    margin 0 0.5em
+
+
+
+@-moz-keyframes three-quarters-loader {
+  0% {
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes three-quarters-loader {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes three-quarters-loader {
+  0% {
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+/* :not(:required) hides this rule from IE9 and below */
+.three-quarters-loader:not(:required) {
+  -moz-animation: three-quarters-loader 1250ms infinite linear;
+  -webkit-animation: three-quarters-loader 1250ms infinite linear;
+  animation: three-quarters-loader 1250ms infinite linear;
+  border: 8px solid #4C4C4C;
+  border-right-color: transparent;
+  border-radius: 16px;
+  box-sizing: border-box;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  text-indent: -9999px;
+  width: 32px;
+  height: 32px;
+  position absolute
+  top 50%
+  margin-top -16px
+}
