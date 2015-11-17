@@ -32,7 +32,11 @@ angular.module('wyborySam2014.area')
     var url = urls.decode($stateParams.dataUrl);
     var name = urls.getSiteName(url);
     $scope.electionKind = urls.getElectionKind(tree, url);
+    $scope.tree = tree;
     $scope.navTree = getNavTree(tree);
+    if($stateParams.dataUrl.length === 0) {
+      return;
+    } 
     getData(url, name);
   });
 
@@ -82,7 +86,7 @@ angular.module('wyborySam2014.area')
         url: kind.url
       };
       changeSiteProperties(data, 'Warszawa', kind.url);
-      // urls.changeDataUrl(kind.url, 'stats');
+      $scope.navTree = getNavTree($scope.tree);
       $rootScope.$broadcast('area::electionTypeChange');
       $scope.electionKindsDropwn = false;
       $scope.showSpinner = false;
@@ -98,9 +102,6 @@ angular.module('wyborySam2014.area')
     $(kind).velocity("scroll", { axis: "y", offset: -60});
   };
 
-  var off = $scope.$on('$stateChangeStart', function(evt,  toState, toParams, fromState, fromParams) {
-   evt.preventDefault();
-   return;
-  });
+
   
 }]);
