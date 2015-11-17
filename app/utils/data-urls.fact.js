@@ -54,7 +54,6 @@ angular.module('wyborySam2014.utils')
   self.changeDataUrl = function(url, StateParamDataUrl, siteType) {
     
     var dataUrl = $location.path().split('/');
-    
     //it is dangerous but now works 
     dataUrl.pop();
     
