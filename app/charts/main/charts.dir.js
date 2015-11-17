@@ -13,14 +13,23 @@ angular.module('wyborySam2014.charts')
       scope.chartData = [{key: "Cumulative Return", values: []}]
       scope.$watch('data', function(val, oldVal) {
         if(val !== oldVal) {
+          
           scope.chartData[0].values = _.map(val.votes,function(v){
             return {
               value: v.percentage,
               label: v.political_party
-          }})
+          }});
           scope.chartData[0].values.sort(function(a, b){
             return b.value - a.value;
-          })
+          });
+
+
+          scope.chartMobileData = _.map(val.votes,function(v){
+            return {
+              y: v.percentage,
+              key: v.political_party
+          }});
+
         }
       });
     }
