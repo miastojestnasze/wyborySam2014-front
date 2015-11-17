@@ -1,5 +1,5 @@
 nav.nav
-  a(class="menu-btn open-menu btn" ng-click='showHideNavMenu()' ng-class="{active: openMenu || openMenu === undefined}" ng-show="dataUrl") 
+  a(class="menu-btn open-menu btn" ng-click='showHideNavMenu($event)' ng-class="{active: openMenu || openMenu === undefined}" ng-show="dataUrl") 
     span.glyphicon.glyphicon-menu-hamburger
   a(class="menu-btn nav-btn open-menu btn chart-btn" ng-click='scrollTo("#charts")' ng-show="dataUrl && stats") Wykresy
     span.glyphicon.glyphicon-stats

@@ -46,7 +46,8 @@ angular.module('wyborySam2014.area')
   });
   $scope.$on('$destroy', des);
 
-  $scope.showHideNavMenu = function() {
+  $scope.showHideNavMenu = function(event) {
+    event.stopPropagation();
     if($scope.openMenu || $scope.openMenu === undefined) {
       $scope.openMenu = false;
     }
