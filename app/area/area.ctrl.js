@@ -21,7 +21,6 @@ angular.module('wyborySam2014.area')
   $scope.chartData = {key: '', values: []};
   $scope.dataUrl = $stateParams.dataUrl;
   $scope.showSpinner = false;
-  $scope.openMenu = true;
 
   httpService.getAreasTree().success(function(tree) {
     $scope.tree = tree;
@@ -47,12 +46,25 @@ angular.module('wyborySam2014.area')
   });
   $scope.$on('$destroy', des);
 
+  $scope.showHideNavMenu = function() {
+    if($scope.openMenu || $scope.openMenu === undefined) {
+      $scope.openMenu = false;
+    }
+    else {
+      $scope.openMenu = true; 
+    }
+  }
+
   $scope.menuIsVisible = function() {
     return $scope.openMenu === false || $scope.openMenu === true;
   };
   $scope.menuIsOff = function() {
     return $scope.openMenu === false;
   };
+
+  $scope.menuDefault = function() {
+    return $scope.openMenu === undefined;
+  }
   
   $scope.dropdownIsOff = function() {
     return $scope.electionKindsDropwn === false;

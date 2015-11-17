@@ -10,6 +10,9 @@ page-layout-margins = 0 50px 0 50px
 .moveOutLeft
   transition:0.3s linear all;
   transform: translateX(0px);
+  
+.menuDefault
+  transform: translateX(130px);
 
 .charts-view
 .tables-view
@@ -22,14 +25,16 @@ page-layout-margins = 0 50px 0 50px
   width 90%
   left 30px
   height 400px
-  &.moveLeft
-    transform: translateX(150px);
+  // &.moveLeft
+  // &.menuDefault
+  //   transform: translateX(130px);
 
 .tables-view
   left 55px
   position relative
   width 90%
   &.moveLeft
+  &.menuDefault
     transform: translateX(170px);
     width 80%
 
@@ -43,6 +48,7 @@ page-layout-margins = 0 50px 0 50px
   margin-left 65px
   width 100%
   &.moveLeft
+  &.menuDefault
     transform: translateX(160px);
 
 .menu-btn
@@ -167,6 +173,7 @@ h4.election-help-text
   animation-duration 1s
   overflow-x auto
   &.moveLeft
+  &.menuDefault
     transform: translateX(200px);
   
   input
