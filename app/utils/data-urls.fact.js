@@ -34,9 +34,9 @@ angular.module('wyborySam2014.utils')
   self.getElectionKind = function(tree, url, splitUrlParam) {
     if(!url || !tree) {
       return { //default data
-        name: 'Wybory do Rady Miasta',
-        type: 'city_council',
-        url: 'stats/city_council/'
+        name: 'Wybierz',
+        type: '',
+        url: ''
       }
     }
 
