@@ -80,7 +80,7 @@ div(ng-if="stats.candidates" id="candidates" st-table="stats.candidates" st-safe
           td {{c.place_of_living}}
           td {{c.sex}}
           td {{c.votes}}
-          td {{c.election_committee}}
+          td {{c.election_committee | shortenCommittee}}
           td {{c.number_of_list}}
           td {{c.pos}}
           td {{c.number_of_district}}
