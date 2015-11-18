@@ -39,7 +39,7 @@ h4
           td {{v.amount}}
           td {{v.percentage + '%'}}
 
-div(ng-if="stats.candidates" id="candidates" st-table="stats.candidates")
+div(ng-if="stats.candidates" id="candidates" st-table="stats.candidates" st-safe-src="rawCandidates")
   h4 
     strong Wyniki kandydatów:
   
@@ -72,8 +72,8 @@ div(ng-if="stats.candidates" id="candidates" st-table="stats.candidates")
               option(value="") Wszyscy
               option(value="t") Tak
               option(value="n") Nie
-      tbody(ng-init="candidatesTableLimit = 30")
-        tr(ng-repeat="c in stats.candidates | limitTo: candidatesTableLimit")
+      tbody()
+        tr(ng-repeat="c in stats.candidates")
           td {{c.surname}}
           td {{c.names}}
           td {{c.age}}
@@ -87,4 +87,4 @@ div(ng-if="stats.candidates" id="candidates" st-table="stats.candidates")
           td {{c.mandate === 't'? 'Tak' : 'Nie'}}
     
   div.text-center
-    div(st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="15")
+    div(st-pagination st-items-by-page="30" st-displayed-pages="15")
