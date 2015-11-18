@@ -40,7 +40,7 @@
     //- Poziom 2: wybór okręgu (tylko dla Rady Miasta)
     span.pkw-chooser-item(ng-show="electionKind.children && electionKind.type == 'city_council'")
       span(ng-if="electionKind.type == 'city_council'")  w okręgu 
-      select(ng-options="area as area.name for area in electionKind.children | orderBy: 'name' " ng-model="areaLevel1") 
+      select(ng-options="area as getCityCouncilAreaName(area) for area in electionKind.children | orderBy: 'name' " ng-model="areaLevel1") 
         option(value="") wszystkie okręgi
 
     //- Poziom 3: wybór obwodu

@@ -123,6 +123,10 @@ angular.module('wyborySam2014.area')
     $scope.areaLevel1 = null;
   };
   
+  $scope.getCityCouncilAreaName = function (area) {
+    return 'nr ' + area.type + ': ' + area.districts;
+  };
+  
   $scope.electionNames = {
     "city_council": 'do rady miasta',
     "district": 'do rad dzielnic',
