@@ -28,4 +28,23 @@ angular.module('wyborySam2014.charts')
       },
     }
   };
+
+  $scope.optionsMobileChart = {
+    chart: {
+      type: 'pieChart',
+      height: 400,
+      donut: true,
+      x: function(d){return d.key;},
+      y: function(d){return d.y;},
+      showLabels: false,
+      pie: {
+      startAngle: function(d) { return d.startAngle/2 -Math.PI/2 },
+      endAngle: function(d) { return d.endAngle/2 -Math.PI/2 }
+      },
+      transitionDuration: 500,
+      legendPosition: 'down' // idk why works, but it hides legend :P
+    }
+  };
+
+
 }])
