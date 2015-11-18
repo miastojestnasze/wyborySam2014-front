@@ -29,7 +29,7 @@
     span.pkw-chooser-item
       strong Zobacz wyniki 
       select(ng-options="election as electionNames[election.type] for election in tree" ng-model="electionKind") 
-        option(ng-if="!electionKind" value="") ☛ wybierz rodzaj wyborow 
+        option(ng-if="!electionKind" value="") ☛ wybierz wybory 
 
     //- Poziom 2: wybór dzielnicy
     span.pkw-chooser-item(ng-show="electionKind.children && electionKind.type != 'city_council'")
@@ -52,7 +52,7 @@
     //- Poziom 3: wybór okręgu (tylko dla Rad Dzielnic)
     span.pkw-chooser-item(ng-show="areaLevel1.children && electionKind.type == 'district'") 
       span(ng-if="electionKind.type == 'district'")  w okręgu 
-      select(ng-options="area as area.name for area in areaLevel1.children" ng-model="areaLevel2") 
+      select(ng-options="area as area.name for area in areaLevel1.children | orderBy: 'name'" ng-model="areaLevel2") 
         option(value="") wszystkie okręgi 
 
     //- Poziom 4: wybór obwodów (tylko dla Rad Dzielnic)
