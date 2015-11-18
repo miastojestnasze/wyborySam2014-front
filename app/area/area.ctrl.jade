@@ -1,81 +1,108 @@
+.pkw-image-header
+  img.pkw-header-image(src="/img/header.jpg")
+  h1
+    strong Wyręczamy PKW
+
+
 .container
 
-  div.pkw-header.page-header.text-center
-    h1 
-      strong Wyręczamy PKW
-    p
-      | Od wyborów samorządowych 2014 minął już rok. Pomimo tego PKW ciągle nie opublikowała 
-      a(href="http://wybory2014.pkw.gov.pl/pl/wyniki/wojewodztwo/view/14" target="_blank") wyników dla Warszawy
-    p 
-      strong  Postanowiliśmy ich wyręczyć! 
+  div.pkw-header.text-center
 
-  section.pkw-chooser.text-center.form-inline
+    p
+      | Od wyborów samorządowych 2014 minął już rok. Pomimo tego Państwowa Komisja Wyborcza ciągle nie opublikowała 
+      a(href="http://wybory2014.pkw.gov.pl/pl/wyniki/wojewodztwo/view/14" target="_blank") wyników dla Warszawy. 
+      strong <br> Postanowiliśmy ich wyręczyć!
     
+    div.pkw-header-share
+      span Podziel się:  
+      div.pkw-header-share-item
+        <div class="fb-share-button" data-href="http://pkw.miastojestnasze.org" data-layout="button_count"></div>
+      div.pkw-header-share-item
+        <a href="https://twitter.com/share" data-url="http://pkw.miastojestnasze.org" class="twitter-share-button" data-text="" data-via="MiastoJestNasze">Tweet</a>
+
+  section.pkw-chooser.text-center.form-inline(id="searchbox")
+
     div.spinner(ng-show="showSpinner")
       .three-quarters-loader
-      
+
     //- Poziom 1: rodzaj wyborów
     span.pkw-chooser-item
-      strong Zobacz wyniki  
+      strong Zobacz wyniki 
       select(ng-options="election as electionNames[election.type] for election in tree" ng-model="electionKind") 
-        option(ng-if="!electionKind" value="") ☛ wybierz rodzaj wyborow
-    
+        option(ng-if="!electionKind" value="") ☛ wybierz rodzaj wyborow 
+
     //- Poziom 2: wybór dzielnicy
     span.pkw-chooser-item(ng-show="electionKind.children && electionKind.type != 'city_council'")
       span(ng-if="electionKind.type != 'city_council'")  w dzielnicy 
       select(ng-options="area as area.name for area in electionKind.children | orderBy: 'name' " ng-model="areaLevel1") 
-        option(value="") wszystkie dzielnice
-    
+        option(value="") wszystkie dzielnice 
+
     //- Poziom 2: wybór okręgu (tylko dla Rady Miasta)
     span.pkw-chooser-item(ng-show="electionKind.children && electionKind.type == 'city_council'")
-      span(ng-if="electionKind.type == 'city_council'")  w okręgu 
+      span(ng-if="electionKind.type == 'city_council'")  w okręgu
       select(ng-options="area as area.name for area in electionKind.children | orderBy: 'name' " ng-model="areaLevel1") 
         option(value="") wszystkie okręgi
-      
+
     //- Poziom 3: wybór obwodu
-    span.pkw-chooser-item(ng-show="areaLevel1.children && electionKind.type != 'district'")
+    span.pkw-chooser-item(ng-show="areaLevel1.children && electionKind.type != 'district'") 
       span(ng-if="electionKind.type != 'district'" )  w obwodzie 
       select(ng-options="area as area.name for area in areaLevel1.children" ng-model="areaLevel2") 
-        option(value="") wszystkie obwody
+        option(value="") wszystkie obwody 
 
-    //- Poziom 3: wybór okręgu (tylko dla Rad Dzielnic)        
-    span.pkw-chooser-item(ng-show="areaLevel1.children && electionKind.type == 'district'")
+    //- Poziom 3: wybór okręgu (tylko dla Rad Dzielnic)
+    span.pkw-chooser-item(ng-show="areaLevel1.children && electionKind.type == 'district'") 
       span(ng-if="electionKind.type == 'district'")  w okręgu 
       select(ng-options="area as area.name for area in areaLevel1.children" ng-model="areaLevel2") 
-        option(value="") wszystkie okręgi
+        option(value="") wszystkie okręgi 
 
-    //- Poziom 4: wybór obwodów (tylko dla Rad Dzielnic)        
+    //- Poziom 4: wybór obwodów (tylko dla Rad Dzielnic)
     span.pkw-chooser-item(ng-show="areaLevel2.children")
-      span  w obwodzie 
-      select(ng-options="area as area.name for area in areaLevel2.children" ng-model="areaLevel3") 
+      span  w obwodzie
+      select(ng-options="area as area.name for area in areaLevel2.children" ng-model="areaLevel3")
         option(value="") wszystkie obwody
 
     span.pkw-chooser-item()
-      span  
-      button.pkw-chooser-button(ng-click="showStats()") Pokaż
-      
+      span
+      button.pkw-chooser-button.pkw-chooser-button-show(ng-click="showStats()") Pokaż
+      button.pkw-chooser-button.pkw-chooser-button-reset(ng-click="resetStats()" ng-if="stats") Resetuj
+
   section.text-center(id="links")
-    
+
     div.pkw-stats-links(ng-if="stats")
-    
+
       span Przejdź do:
-      
+
       a(class=" chart-btn" ng-click='scrollTo("#charts")' ng-show="stats")
-        span.glyphicon.glyphicon-stats 
+        span.glyphicon.glyphicon-stats
         span  Wykresy
-        
+
       a(class=" stats-btn" ng-click='scrollTo("#tables")' ng-show="stats")
-        span.glyphicon.glyphicon-th-list 
+        span.glyphicon.glyphicon-th-list
         span  Statystyki
 
       a(class="" ng-click='scrollTo("#candidates")' ng-show="stats.candidates")
-        span.glyphicon.glyphicon-user 
+        span.glyphicon.glyphicon-user
         span  Kandydaci
-        
+
   section(id="charts")
     charts-view(data="stats"  ng-hide="!stats")
-  
+
   section(id="tables")
     tables-view(stats="stats" election-kind="electionKind"  ng-hide="!stats")
+    
+  section.row
+    div.text-center.col-md-8.col-md-offset-2
+      h4 O projekcie
+      p #[strong Mija rok od wyborów samorządowych]. Niestety wyników w internecie nadal nie ma. Miasto Jest Nasze, wobec niedociągnięć państwowych instytucji, nie pozostaje bierne - stowarzyszenie postanowiło samo opublikować wyniki wyborów samorządowych w Warszawie. Na podstawie danych przesłanych przez Państwową Komisję Wyborczą w pliku Excel powstał serwis, który udostępnia wyniki głosowania w łatwy i przejrzysty sposób.
 
-  
+  section.row.pkw-owner
+    div.text-center.col-md-8.col-md-offset-2
+      h4 Pomysłodawca projektu
+        a.pkw-owner-logo(href="http://www.miastojestnasze.org")
+          img(src="/img/logo-mjn.png")
+
+  section.row.pkw-autor
+    div.col-md-8.col-md-offset-2
+      h4.text-center Autor projektu
+      img.pkw-autor-photo(src="/img/autor.jpg")
+      p PKW nie dało rady więc w Miasto Jest Nasze poprosiliśmy #[a(href="https://www.linkedin.com/in/pawe%C5%82-ga%C5%82wa-75562188") Pawła Gawłę]: programistę od półtora roku, wcześniej dziennikarza. Kocha Warszawę, działalność społeczną i podobno ma 21 lat. Koszt strony: 5 zarwanych nocy, 3 litry kawy i 80 wypalonych papierosów

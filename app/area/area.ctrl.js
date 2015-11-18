@@ -96,7 +96,7 @@ angular.module('wyborySam2014.area')
   };
 
   $scope.scrollTo = function(kind) {
-    $(kind).velocity("scroll", { axis: "y", offset: -60});
+    $(kind).velocity("scroll", { axis: "y"});
   };
 
   $scope.changeArea = function(element) {
@@ -110,10 +110,18 @@ angular.module('wyborySam2014.area')
     var currentArea = $scope.areaLevel3 || $scope.areaLevel2 || $scope.areaLevel1 || $scope.electionKind;
     $rootScope.$broadcast('area::areaTypeChange', currentArea.url, currentArea.name);
     var off = $rootScope.$on('site::changed', function () {
-      $scope.scrollTo('#links');
+      $scope.scrollTo('#searchbox');
       off();
     });
   }
+  
+  $scope.resetStats = function () {
+    $scope.stats = null;
+    $scope.electionKind = null;
+    $scope.areaLevel3 = null;
+    $scope.areaLevel2 = null;
+    $scope.areaLevel1 = null;
+  };
   
   $scope.electionNames = {
     "city_council": 'do rady miasta',
