@@ -50,7 +50,6 @@ div(ng-if="stats.candidates" id="candidates" st-table="stats.candidates" st-safe
           th(st-sort="surname" class="sorter") Nazwisko
           th(st-sort="names" class="sorter") Imiona
           th(st-sort="age" class="sorter") Wiek
-          th Miejsce Zam.
           th(st-sort="sex" class="sorter") Płeć
           th(st-sort="votes" class="sorter") Głosy
           th(st-sort="surname" class="sorter") Komitet
@@ -77,7 +76,6 @@ div(ng-if="stats.candidates" id="candidates" st-table="stats.candidates" st-safe
           td {{c.surname}}
           td {{c.names}}
           td {{c.age}}
-          td {{c.place_of_living}}
           td {{c.sex}}
           td {{c.votes}}
           td {{c.election_committee | shortenCommittee}}
